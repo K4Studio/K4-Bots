@@ -19,19 +19,19 @@ async def reply(ctx, channel_id: int, message_id: int, *, response: str):
     # Check if the user has one of the allowed roles to use the command
     allowed = any(role.name in allowed_roles for role in ctx.author.roles)
     if not allowed: 
-        await ctx.send("Ju nuk keni leje per te perdorur kete komande.")
+        await ctx.send("You do not have permission to use this command..")
         return
 
     # Fetch the target channel and message
     target_channel = bot.get_channel(channel_id)
     if not target_channel:
-        await ctx.send("Kanali i synuar i nuk gjindet.")
+        await ctx.send("The channel is not found.")
         return
 
     try:
         target_message = await target_channel.fetch_message(message_id)
     except discord.NotFound:
-        await ctx.send("Mesazh i synuar nuk gjindet.")
+        await ctx.send("The message is not found.")
         return
 
     # Reply to the target message
